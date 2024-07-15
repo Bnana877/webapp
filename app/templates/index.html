@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グランベルム設定推測</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .input-short {
+            width: 60%;
+        }
+        .center {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .bordered {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .sticky {
+          position: sticky;
+          top: 0;
+          left: 0;
+         background: #f9f9f9;
+          border-top: none;
+          border-bottom: none;
+        }
+        .sticky:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-top: 1px solid #ccc;
+            border-bottom: 2px solid #ccc;
+            background: #f9f9f9;
+            z-index: -1;
+        }
+        .scrollable {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0;
+            border: 1px solid #ccc;
+        }
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>グランベルム設定推測</h1>
+    <div class="bordered">
+        <h2>導入設定比表</h2>
+        <table>
+            <tr style="background-color:#f9f9f9;">
+                <th>設定1<br><input type="checkbox" class="toggle" checked></th>
+                <th>設定2<br><input type="checkbox" class="toggle" checked></th>
+                <th>設定3<br><input type="checkbox" class="toggle" checked></th>
+                <th>設定4<br><input type="checkbox" class="toggle" checked></th>
+                <th>設定5<br><input type="checkbox" class="toggle" checked></th>
+                <th>設定6<br><input type="checkbox" class="toggle" checked></th>
+            </tr>
+            <tr>
+                <td><input type="number" class="input-short" value="58.92"></td>
+                <td><input type="number" class="input-short" value="25.58"></td>
+                <td><input type="number" class="input-short" value="9.00"></td>
+                <td><input type="number" class="input-short" value="4.66"></td>
+                <td><input type="number" class="input-short" value="1.20"></td>
+                <td><input type="number" class="input-short" value="0.65"></td>
+            </tr>
+        </table>
+    </div>
+
+     <div class="bordered">
+        <h2>ナカミミエール履歴表</h2>
+
+        <div class="scrollable">
+
+            <table id="historyTable">
+                <thead>
+                   <tr>
+                    <th class="sticky">サイクル</th>
+                    <th class="sticky">アイコン</th>
+                   </tr>
+                </thead>
+                <tbody>
+
+                    <script>
+                        for (let i = 1; i <= 10; i++) {
+                            document.write(`<tr>
+                                <td>${i}</td>
+                                <td>
+                                    <select>
+                                        <option value="">---</option>
+                                        <option value="月（青）">月（青）</option>
+                                        <option value="月（緑）">月（緑）</option>
+                                        <option value="魔（青）">魔（青）</option>
+                                        <option value="魔（緑）">魔（緑）</option>
+                                        <option value="希（青）">希（青）</option>
+                                        <option value="希（緑）">希（緑）</option>
+                                        <option value="ホワイトリリー">ホワイトリリー</option>
+                                        <option value="クレストアンス">クレストアンス</option>
+                                        <option value="雪月梅花">雪月梅花</option>
+                                        <option value="アークナイトグリス">アークナイトグリス</option>
+                                        <option value="ヴィオラカッツェ">ヴィオラカッツェ</option>
+                                        <option value="ドロセラノクターン">ドロセラノクターン</option>
+                                        <option value="覚醒ホワイトリリー">覚醒ホワイトリリー</option>
+                                        <option value="セドラアノクターン">セドラアノクターン</option>
+                                        <option value="ジーグァンロン">ジーグァンロン</option>
+                                        <option value="先読み">先読み</option>
+                                    </select>
+                                </td>
+                            </tr>`);
+                        }
+                    </script>
+                </tbody>
+            </table>
+        </div>
+        <div class="center">
+            <button onclick="adjustRows(10)">+増やす</button>
+            <button onclick="adjustRows(-10)">-減らす</button>
+        </div>
+    </div>
+
+    <div class="bordered">
+        <h2>設定推測値表</h2>
+        <table>
+            <tr style="background-color:#f9f9f9;">
+                <th></th>
+                <th>設定1</th>
+                <th>設定2</th>
+                <th>設定3</th>
+                <th>設定4</th>
+                <th>設定5</th>
+                <th>設定6</th>
+            </tr>
+            <tr>
+                <td>尤度比</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ベイズ</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="center">
+            <button onclick="submitData()">計算</button>
+        </div>
+    </div>
+
+
+
+    <div class="center">
+        <textarea id="stateTextBox" rows="5" cols="40" style="resize: none;"></textarea>
+    </div>
+
+    <div class="center">
+        <button onclick="exportState()">出力</button>
+        <button onclick="saveToCookie()">保存</button>
+        <button onclick="copyToClipboard()">コピー</button>
+        <button onclick="window.location.reload()">リセット</button>
+         <button onclick="loadFromCookie()">読み込み</button>
+    </div>
+
+
+    <script>
+        function loadFromCookie() {
+            const cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('textareaContent='))
+                ?.split('=')[1];
+
+            if (cookieValue) {
+                if(!document.getElementById('stateTextBox').value){
+                    document.getElementById('stateTextBox').value = decodeURIComponent(cookieValue);
+                }
+                importState()
+                alert('データを読み込みました.');
+            } else {
+                alert('保存されているデータがありません．');
+            }
+        }
+        function saveToCookie() {
+            exportState()
+            const textareaContent = document.getElementById('stateTextBox').value;
+            const date = new Date();
+            date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
+            const expires = "; expires=" + date.toUTCString();
+            document.cookie = `textareaContent=${encodeURIComponent(textareaContent)}${expires}; path=/;`;
+            alert('データを保存しました．');
+        }
+        function copyToClipboard() {
+        const textArea = document.getElementById('stateTextBox');
+        textArea.select();
+        document.execCommand('copy');
+        alert('クリップボードにコピーしました');
+        }
+        function adjustRows(amount) {
+            const table = document.getElementById('historyTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length;
+            if (rowCount + amount >= 10) {
+                if (amount > 0) {
+                    for (let i = 0; i < amount; i++) {
+                        const newRow = table.insertRow();
+                        const cell1 = newRow.insertCell(0);
+                        const cell2 = newRow.insertCell(1);
+                        cell1.textContent = rowCount + i + 1;
+                        cell2.innerHTML = `<select>
+                                        <option value="">---</option>
+                                        <option value="月（青）">月（青）</option>
+                                        <option value="月（緑）">月（緑）</option>
+                                        <option value="魔（青）">魔（青）</option>
+                                        <option value="魔（緑）">魔（緑）</option>
+                                        <option value="希（青）">希（青）</option>
+                                        <option value="希（緑）">希（緑）</option>
+                                        <option value="ホワイトリリー">ホワイトリリー</option>
+                                        <option value="クレストアンス">クレストアンス</option>
+                                        <option value="雪月梅花">雪月梅花</option>
+                                        <option value="アークナイトグリス">アークナイトグリス</option>
+                                        <option value="ヴィオラカッツェ">ヴィオラカッツェ</option>
+                                        <option value="ドロセラノクターン">ドロセラノクターン</option>
+                                        <option value="覚醒ホワイトリリー">覚醒ホワイトリリー</option>
+                                        <option value="セドラアノクターン">セドラアノクターン</option>
+                                        <option value="ジーグァンロン">ジーグァンロン</option>
+                                        <option value="先読み">先読み</option>
+                        </select>`;
+                    }
+                } else {
+                    for (let i = 0; i < -amount; i++) {
+                        table.deleteRow(rowCount - 1 - i);
+                    }
+                }
+            }
+        }
+
+        function submitData() {
+        const settings = Array.from(document.querySelectorAll('.input-short')).map((input, index) => {
+            const toggle = document.querySelectorAll('.toggle')[index];
+            return toggle.checked ? Number(input.value) : 0;
+        });
+        const historyTable = document.getElementById('historyTable').getElementsByTagName('tbody')[0];
+        const history = Array.from(historyTable.rows).map(row => {
+            return {
+                cycle: parseInt(row.cells[0].textContent),
+                icon: row.cells[1].querySelector('select').value
+            };
+        });
+
+        const data = {
+            settings: settings.map(Number),
+            history: history
+        };
+
+        fetch('/submit', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => {
+    if (!response.ok) {
+        return response.json().then(errorData => {
+            throw new Error(errorData.detail);
+        });
+    }
+    return response.json();
+})
+.then(result => {
+    // Update the table with the result data
+    const predictionTable = document.querySelector('.bordered:nth-of-type(3) table');
+    for (let i = 0; i < 6; i++) {
+        predictionTable.rows[1].cells[1+i].textContent = new Intl.NumberFormat('ja', { style: 'percent', maximumFractionDigits: 2}).format(result.likelihood[i]);
+        predictionTable.rows[2].cells[1+i].textContent = new Intl.NumberFormat('ja', { style: 'percent', maximumFractionDigits: 2}).format(result.bayes[i]);
+    }
+})
+.catch(error => {
+    if (error.message === "存在しない組み合わせです.") {
+        alert("存在しない組み合わせです.");
+    } else {
+        console.error('Error:', error);
+    }
+});
+
+    }
+        function compress(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    function decompress(str) {
+        return decodeURIComponent(escape(atob(str)));
+    }
+        function exportState() {
+        const settings = Array.from(document.querySelectorAll('.input-short')).map(input => input.value);
+        const historyTable = document.getElementById('historyTable').getElementsByTagName('tbody')[0];
+        const history = Array.from(historyTable.rows).map(row => {
+            return {
+                cycle: parseInt(row.cells[0].textContent),
+                icon: row.cells[1].querySelector('select').value
+            };
+        });
+
+        const toggles = Array.from(document.querySelectorAll('.toggle')).map(toggle => toggle.checked);
+
+        const state = {
+            settings: settings,
+            history: history,
+            toggles: toggles
+        };
+        const compressedState = compress(JSON.stringify(state));
+        document.getElementById('stateTextBox').value = compressedState;
+    }
+    function importState() {
+        try {
+            const compressedState = document.getElementById('stateTextBox').value;
+            const state = JSON.parse(decompress(compressedState));
+
+            const inputs = document.querySelectorAll('.input-short');
+            state.settings.forEach((value, index) => {
+                inputs[index].value = value;
+            });
+
+            const historyTable = document.getElementById('historyTable').getElementsByTagName('tbody')[0];
+            while (historyTable.rows.length > 0) {
+                historyTable.deleteRow(0);
+            }
+            state.history.forEach(entry => {
+                const newRow = historyTable.insertRow();
+                const cell1 = newRow.insertCell(0);
+                const cell2 = newRow.insertCell(1);
+                cell1.textContent = entry.cycle;
+                cell2.innerHTML = `<select>
+                                        <option value="">---</option>
+                                        <option value="月（青）">月（青）</option>
+                                        <option value="月（緑）">月（緑）</option>
+                                        <option value="魔（青）">魔（青）</option>
+                                        <option value="魔（緑）">魔（緑）</option>
+                                        <option value="希（青）">希（青）</option>
+                                        <option value="希（緑）">希（緑）</option>
+                                        <option value="ホワイトリリー">ホワイトリリー</option>
+                                        <option value="クレストアンス">クレストアンス</option>
+                                        <option value="雪月梅花">雪月梅花</option>
+                                        <option value="アークナイトグリス">アークナイトグリス</option>
+                                        <option value="ヴィオラカッツェ">ヴィオラカッツェ</option>
+                                        <option value="ドロセラノクターン">ドロセラノクターン</option>
+                                        <option value="覚醒ホワイトリリー">覚醒ホワイトリリー</option>
+                                        <option value="セドラアノクターン">セドラアノクターン</option>
+                                        <option value="ジーグァンロン">ジーグァンロン</option>
+                                        <option value="先読み">先読み</option>
+                </select>`;
+                cell2.querySelector('select').value = entry.icon;
+            });
+
+            state.toggles.forEach((checked, index) => {
+                document.querySelectorAll('.toggle')[index].checked = checked;
+            });
+        } catch (error) {
+            alert("状態の復元に失敗しました。正しいデータが入力されていることを確認してください。");
+        }
+    }
+    </script>
+</body>
+</html>
